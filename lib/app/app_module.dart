@@ -10,7 +10,6 @@ class AppModule extends Module {
 
   @override
   List<ModularRoute> get routes => [
-        ChildRoute(Modular.initialRoute,
-            child: (_, args) => const DashboardPage()),
+        ChildRoute(Modular.initialRoute, child: (_, args) => DashboardPage()),
       ];
 }

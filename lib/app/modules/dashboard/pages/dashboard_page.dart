@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:marvel_studios/app/core/helpers/helper.dart';
 import 'package:marvel_studios/app/core/style/text.dart';
 import 'package:marvel_studios/app/core/style/size.dart';
 import 'package:marvel_studios/app/core/style/color.dart';
+import 'package:marvel_studios/app/modules/dashboard/components/drawer/dashboard_drawer_page.dart';
 import 'package:marvel_studios/app/modules/dashboard/pages/dashboard_controller.dart';
 
 class DashboardPage extends StatefulWidget {
-  const DashboardPage({Key? key}) : super(key: key);
+  DashboardPage({Key? key}) : super(key: key);
 
   @override
   State<DashboardPage> createState() => _DashboardPageState();
@@ -15,6 +17,7 @@ class DashboardPage extends StatefulWidget {
 
 class _DashboardPageState extends State<DashboardPage> {
   final _controller = Modular.get<DashboardController>();
+  final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
@@ -25,6 +28,8 @@ class _DashboardPageState extends State<DashboardPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: scaffoldKey,
+      drawer: const DashboardDrawerPage(),
       body: Stack(
         children: [
           Container(
@@ -77,14 +82,14 @@ class _DashboardPageState extends State<DashboardPage> {
                                 color: Colors.white,
                               ),
                               onPressed: () =>
-                                  {}, //scaffoldKey.currentState?.openDrawer(),
+                                  scaffoldKey.currentState?.openDrawer(),
                             ),
                           ),
                           Align(
                             alignment: Alignment.center,
                             child: Image.asset(
-                              "assets/images/logo.png",
-                              height: 30,
+                              "assets/images/logo_white.png",
+                              height: context.heightLength(.03),
                             ),
                           ),
                         ],
@@ -104,7 +109,6 @@ class _DashboardPageState extends State<DashboardPage> {
                           style: const TextStyle().textBold(12, Colors.white),
                         ),
                         Container(
-                          //color: Colors.red,
                           height: context.heightLength(.4),
                           child: ListView.separated(
                               itemCount: _controller.marvelProducts.length,
@@ -115,6 +119,7 @@ class _DashboardPageState extends State<DashboardPage> {
                                       ),
                               shrinkWrap: true,
                               itemBuilder: (BuildContext context, int index) {
+                                final item = _controller.marvelProducts[index];
                                 return Observer(builder: (context) {
                                   return Container(
                                     width: context.widthLength(.35),
@@ -153,11 +158,11 @@ class _DashboardPageState extends State<DashboardPage> {
                                               Container(
                                                 width: context.widthLength(.3),
                                                 child: Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
                                                   children: [
                                                     Text(
-                                                      _controller
-                                                          .marvelProducts[index]
-                                                          .originalTitle,
+                                                      item.originalTitle,
                                                       style: const TextStyle()
                                                           .textRegular(
                                                               12, Colors.white),
@@ -169,7 +174,8 @@ class _DashboardPageState extends State<DashboardPage> {
                                                         height: context
                                                             .heightLength(.01)),
                                                     Text(
-                                                      '2017',
+                                                      Helper.getYearInDate(
+                                                          item.releaseDate),
                                                       style: const TextStyle()
                                                           .textRegular(
                                                         12,
