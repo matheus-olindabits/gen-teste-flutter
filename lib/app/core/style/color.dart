@@ -8,7 +8,7 @@ class WColor {
   static const Color darkPrimary = Color(0xFF7F8192);
 
   static const MaterialColor themePrimary = MaterialColor(
-    0xFF01335F,
+    0xFFe50b14,
     <int, Color>{
       50: colorPrimary,
       100: colorPrimary,

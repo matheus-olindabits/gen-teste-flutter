@@ -78,16 +78,17 @@ class _DashboardElementsPageState extends State<DashboardElementsPage> {
                       'LINHA DO TEMPO',
                       style: const TextStyle().textBold(12, Colors.white),
                     ),
-                    Observer(builder: (context) {
-                      return Container(
-                        height: context.heightLength(.4),
-                        child: ListView.separated(
+                    Observer(
+                      builder: (context) {
+                        return Container(
+                          height: context.heightLength(.4),
+                          child: ListView.separated(
                             itemCount: _controller.marvelProducts.length,
                             scrollDirection: Axis.horizontal,
                             separatorBuilder:
                                 (BuildContext context, int index) => SizedBox(
-                                      width: context.widthLength(.03),
-                                    ),
+                              width: context.widthLength(.03),
+                            ),
                             shrinkWrap: true,
                             itemBuilder: (BuildContext context, int index) {
                               final item = _controller.marvelProducts[index];
@@ -157,9 +158,11 @@ class _DashboardElementsPageState extends State<DashboardElementsPage> {
                                   ),
                                 ),
                               );
-                            }),
-                      );
-                    }),
+                            },
+                          ),
+                        );
+                      },
+                    ),
                   ],
                 ),
               ],

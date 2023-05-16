@@ -1,5 +1,7 @@
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:marvel_studios/app/modules/dashboard/shared/services/dashboard_service.dart';
 import 'package:marvel_studios/app/modules/dashboard/shared/models/marvel.dart';
+import 'package:marvel_studios/app/router.dart';
 import 'package:mobx/mobx.dart';
 part 'dashboard_controller.g.dart';
 
@@ -18,7 +20,7 @@ abstract class DashboardControllerBase with Store {
     try {
       marvelProducts = await _dashboardService.getMarvelProductsService();
     } catch (error) {
-      //SnackBarErro.snackbarErro(error);
+      Modular.to.pushNamed(RouterApp.error);
     }
   }
 }
