@@ -28,10 +28,4 @@ extension TextStyleValues on TextStyle {
         fontWeight: FontWeight.w800,
         color: (color == null) ? Colors.black : color,
       );
-
-  TextStyle textUnderlineStyle(double size, Color? color) => TextStyle(
-        fontSize: size,
-        fontFamily: 'RobotoRegular',
-        decoration: TextDecoration.underline,
-      );
 }
